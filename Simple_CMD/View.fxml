@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="500.0" maxWidth="764.0" prefHeight="500.0" prefWidth="764.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cmd.Controller">
+   <children>
+      <VBox prefHeight="500.0" prefWidth="764.0">
+         <children>
+            <TextArea id="history" fx:id="history" editable="false" prefHeight="443.0" prefWidth="578.0" style="-fx-background-color: #800080; -fx-border-color: #800080;">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font></TextArea>
+            <TextField id="current" fx:id="current" onKeyPressed="#commandEnterd" prefHeight="30.0" prefWidth="500.0" style="-fx-background-color: #800080; -fx-font-color: white;">
+               <font>
+                  <Font name="Ubuntu Mono Bold" size="27.0" />
+               </font></TextField>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
