@@ -16,7 +16,7 @@ public class Disk {
 			at = new ContiguousAllocation();		
 		}
 		else{
-			at = new LinkedAllocation();
+			at = new IndexedAllocation();
 		}
 		tree = new Tree();
 		this.diskSize = diskSize;

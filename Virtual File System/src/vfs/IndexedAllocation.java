@@ -1,6 +1,6 @@
 package vfs;
 
-public class LinkedAllocation implements AllocationTechnique {
+public class IndexedAllocation implements AllocationTechnique {
 
 	@Override
 	public Boolean Save(String name ,int size) {
