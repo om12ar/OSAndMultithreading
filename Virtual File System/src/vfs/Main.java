@@ -41,6 +41,11 @@ public class Main {
 		d.DisplayTreeStructure();
 		d.CFolder("/om12ar/test", "hi");
 		d.DisplayTreeStructure();
+		
+		d.CFile("/", "file", 100);
+		d.CFile("/", "file2", 100);
+		d.CFile("/om12ar", "mine", 100);
+		d.DisplayTreeStructure();
 	    // Path path = Paths.get(drive.getAbsolutePath() , "dir1");
 	   
 		//Files.createDirectories(path);

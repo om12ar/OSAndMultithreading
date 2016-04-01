@@ -4,19 +4,19 @@ import java.util.Date;
 public class FileModel {
 
 	String name;
-	String Type;
+	//String Type;
 //	String Location;
 	Integer size;
 	Date CreationDate ;
 	Date LastModificationDate;
 	
-	public FileModel(String name, String type, String location, Integer size, Date creationDate, Date lastModificationDate) {		
+	public FileModel(String name, Integer size) {
+		
 		this.name = name;
-		Type = type;
-	//	Location = location;
 		this.size = size;
-		CreationDate = creationDate;
-		LastModificationDate = lastModificationDate;
+		Date d= new Date();
+		CreationDate =d;
+		LastModificationDate = d;
 	}
 	
 	public String getName() {
@@ -25,18 +25,7 @@ public class FileModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getType() {
-		return Type;
-	}
-	public void setType(String type) {
-		Type = type;
-	}
-	/*public String getLocation() {
-		return Location;
-	}
-	public void setLocation(String location) {
-		Location = location;
-	}*/
+	
 	public Integer getSize() {
 		return size;
 	}
