@@ -9,7 +9,7 @@ public class LinkedAllocation implements AllocationTechnique {
 	}
 
 	@Override
-	public Boolean Delete() {
+	public Boolean Delete(String path) {
 		// TODO Auto-generated method stub
 		return null;
 	}

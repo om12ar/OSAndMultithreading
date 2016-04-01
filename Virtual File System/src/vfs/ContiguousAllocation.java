@@ -45,9 +45,16 @@ public class ContiguousAllocation implements AllocationTechnique {
 	}
 
 	@Override
-	public Boolean Delete() {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean Delete(String path) {
+		boolean found = false;
+		for(int i =0 ;i<directory.size();i++ ){
+			//to delete all the children 
+			 if(directory.get(i).first.startsWith(path)){
+                 directory.get(i).first = "";
+                 found =true ;
+             }
+		}
+		return found;
 	}
 	
 	@Override

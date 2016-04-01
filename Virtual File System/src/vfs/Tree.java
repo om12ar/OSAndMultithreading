@@ -61,6 +61,43 @@ public class Tree {
 		
 	}
 	
+	public Boolean deleteFolder(ArrayList<String> path){
+		Node<FolderModel> traverse = new Node<>();
+		traverse= rootNode;
+		String FileName = path.get(path.size()-1);
+		//Check if path to folder exists 
+		for(int i= 1 ; i < path.size()-1  ;i++){
+			boolean found = false;
+			
+			for (int j = 0; j < traverse.getFolders().size(); j++) {
+			
+				if(traverse.getFolders().get(j).getData().getName().equals(path.get(i))){
+					traverse = traverse.getFolders().get(j);
+					found= true;
+					break;
+				}
+			}
+			if(!found){
+				System.out.println("This path is not found" );
+				return false;
+			}
+		}
+	
+		
+		// check if this folder already exists in this path	
+		for (int i = 0; i < traverse.getFolders().size(); i++) {
+			System.out.println(traverse.getFolders().get(i).getData().getName()+" != " + FileName);
+			if( traverse.getFolders().get(i).getData().getName().equals(FileName)){
+				traverse.getFolders().remove(i);
+				return true;
+			}
+		}
+		
+		System.out.println("Folder Not Found in path" );
+		return false;
+		
+	}
+	
 	public Boolean createFile(ArrayList<String> path, FileModel newFile){
 		Node<FolderModel> traverse = new Node<>();
 		traverse= rootNode;
@@ -99,6 +136,41 @@ public class Tree {
 		
 	}
 	
+	public Boolean  deleteFile(ArrayList<String> path) {
+		
+		Node<FolderModel> traverse = new Node<>();
+		traverse= rootNode;
+		//Check if path to folder exists 
+		
+		String fileName = path.get(path.size()-1);
+		for(int i= 1 ; i < path.size()-1  ;i++){
+			boolean found = false;
+			
+			for (int j = 0; j < traverse.getFolders().size(); j++) {
+				if(traverse.getFolders().get(j).getData().getName().equals(path.get(i))){
+					traverse = traverse.getFolders().get(j);
+					found= true;
+					break;
+				}
+			}
+			if(!found){
+				System.out.println("This path is not found" );
+				return false;
+			}
+		}
+		
+		for (int i = 0; i < traverse.getFiles().size(); i++) {
+			System.out.println(traverse.getFiles().get(i).getData().getName()+" != " + fileName);
+			if( traverse.getFiles().get(i).getData().getName().equals(fileName)){
+				traverse.getFiles().remove(i);
+				return true;
+			}
+		}
+		System.out.println("File Not Found in path" );
+		return false;
+		
+	}
+	
 	
 	public void printTree(Node<FolderModel> traverse , int d){
 		String indent="";
@@ -114,13 +186,17 @@ public class Tree {
 			//System.out.println(traverse.getData().getName() +" UP " + d);
 
 		}
+		if(traverse.getFiles().size()>0){
+			System.out.print(indent+"\t");
+		}
 		for(int j =0 ;j < traverse.getFiles().size() ;j++){
-			System.out.print(indent+"\t"+traverse.getFiles().get(j).getData().getName() +" , ");
+			System.out.print(traverse.getFiles().get(j).getData().getName() +" , ");
 			if(j == traverse.getFiles().size()-1){
 				System.out.println();
 			}
 		}
 	}
+	
 	
 	
 }

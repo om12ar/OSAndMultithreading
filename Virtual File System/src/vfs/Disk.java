@@ -56,4 +56,20 @@ public class Disk {
 		
 		
 	}
+	public void DFile(String pathString) {
+		
+		ArrayList<String> path = new ArrayList<>();
+		path.addAll(Arrays.asList(pathString.split("/")));
+		if(at.Delete(pathString)){
+			tree.deleteFile(path);
+		}
+	}
+	public void DFolder(String pathString) {
+		ArrayList<String> path = new ArrayList<>();
+		path.addAll(Arrays.asList(pathString.split("/")));
+		if(at.Delete(pathString)){
+			tree.deleteFolder(path);
+		}
+		
+	}
 }

@@ -66,12 +66,25 @@ public class Main {
 			}
 
 				
-			case "DeleteFile":
+			case "DeleteFile":{
+				if(tokens.size()!=2){
+					System.out.println("Wrong Command");
+					break;
+				}
+				String path = tokens.get(1);
+				d.DFile(path);
+				break ;
+			}
 
-				break;
-			case "DeleteFolder":
-
-				break;
+			case "DeleteFolder":{
+				if(tokens.size()!=2){
+					System.out.println("Wrong Command");
+					break;
+				}
+				String path = tokens.get(1);
+				d.DFolder(path);
+				break ;
+			}
 			case "DisplayDiskStatus":
 
 				break;
