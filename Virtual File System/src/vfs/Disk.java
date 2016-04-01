@@ -47,7 +47,8 @@ public class Disk {
 		FileModel filemodel = new FileModel(path.get(path.size()-1),pathString , fileSize);
 		
 		//System.err.println("Disk.CFolder()" + path);
-		if(at.Save(pathString, fileSize)){
+		double numOfBlocks = Math.ceil(fileSize/1000.0) ; 
+		if(at.Save(pathString, (int) numOfBlocks)){
 			tree.createFile(path, filemodel);
 		}
 		else{

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ContiguousAllocation implements AllocationTechnique {
 	
-	//  file 	start 	length
+	//  file 	start 	#ofblocks
 	ArrayList<Pair<String, Pair <Integer ,Integer> > > directory ;
 	
 	public ContiguousAllocation() {
