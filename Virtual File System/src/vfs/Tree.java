@@ -11,7 +11,7 @@ public class Tree {
     	Date d = new Date();
 		System.out.println("Disk.Disk() + " + d.toString());
 		
-    	FolderModel rootFolder = new FolderModel("/" ,d , d);
+    	FolderModel rootFolder = new FolderModel("root" , "root" );
 		rootNode = new Node<>(rootFolder);
 	}
 	public Node<FolderModel> getRootNode() {
@@ -27,7 +27,7 @@ public class Tree {
 		traverse= rootNode;
 		
 		//Check if path to folder exists 
-		for(int i= 1 ; i < path.size()  ;i++){
+		for(int i= 1 ; i < path.size()-1  ;i++){
 			boolean found = false;
 			
 			for (int j = 0; j < traverse.getFolders().size(); j++) {
@@ -39,7 +39,7 @@ public class Tree {
 				}
 			}
 			if(!found){
-				System.out.println("Tree.createFolder() : path not found" );
+				System.out.println("This path is not found" );
 				return false;
 			}
 		}
@@ -47,8 +47,9 @@ public class Tree {
 		
 		// check if this folder already exists in this path	
 		for (int i = 0; i < traverse.getFolders().size(); i++) {
-			if( traverse.getFolders().get(i).getData().getName() == newFolder.getName()){
-				System.out.println("Tree.createFolder() : path Already exists" );
+			System.out.println(traverse.getFolders().get(i).getData().getName()+" != " + newFolder.getName());
+			if( traverse.getFolders().get(i).getData().getName().equals(newFolder.getName())){
+				System.out.println("path Already exists" );
 				return false;
 			}
 		}
@@ -65,7 +66,7 @@ public class Tree {
 		traverse= rootNode;
 		
 		//Check if path to folder exists 
-		for(int i= 1 ; i < path.size()  ;i++){
+		for(int i= 1 ; i < path.size()-1  ;i++){
 			boolean found = false;
 			
 			for (int j = 0; j < traverse.getFolders().size(); j++) {
@@ -77,7 +78,7 @@ public class Tree {
 				}
 			}
 			if(!found){
-				System.out.println("Tree.createFolder() : path not found" );
+				System.out.println("This path is not found !"  );
 				return false;
 			}
 		}
@@ -85,8 +86,8 @@ public class Tree {
 		
 		// check if this folder already exists in this path	
 		for (int i = 0; i < traverse.getFiles().size(); i++) {
-			if( traverse.getFiles().get(i).getData().getName() == newFile.getName()){
-				System.out.println("Tree.createFolder() : path Already exists" );
+			if( traverse.getFiles().get(i).getData().getName().equals(newFile.getName())){
+				System.out.println("this File Already exists !" );
 				return false;
 			}
 		}

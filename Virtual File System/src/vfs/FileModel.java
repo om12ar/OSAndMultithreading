@@ -4,15 +4,15 @@ import java.util.Date;
 public class FileModel {
 
 	String name;
-	//String Type;
-//	String Location;
+	String path;
 	Integer size;
 	Date CreationDate ;
 	Date LastModificationDate;
 	
-	public FileModel(String name, Integer size) {
+	public FileModel(String name,String Path , Integer size) {
 		
 		this.name = name;
+		this.path = Path;
 		this.size = size;
 		Date d= new Date();
 		CreationDate =d;

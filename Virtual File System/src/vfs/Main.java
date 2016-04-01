@@ -33,7 +33,7 @@ public class Main {
 		// RandomAccessFile drive = new RandomAccessFile("VFSD.vfs", "rw");
 		// drive.setLength(1000000 * 1000);
 
-		Disk d = new Disk();
+		Disk d = new Disk(1 , 100);
 
 		String cmd = "";
 
@@ -41,21 +41,27 @@ public class Main {
 			cmd = in.nextLine();
 			ArrayList<String> tokens = new ArrayList<>();
 			tokens.addAll(Arrays.asList(cmd.split("\\s+")));
-			System.err.println(tokens);
+			//System.err.println(tokens);
 
 			switch (tokens.get(0)) {
 			case "CFile":{
+				if(tokens.size()!=3){
+					System.out.println("Wrong Command");
+					break;
+				}
 				String path = tokens.get(1);
 				int size = Integer.parseInt(tokens.get(2));
-				String name = tokens.get(3);
-				d.CFile(path, name, size);		
+				d.CFile(path, size);		
 				break;
 			}
 				
 			case "CFolder":{
+				if(tokens.size()!=2){
+					System.out.println("Wrong Command");
+					break;
+				}
 				String path = tokens.get(1);
-				String name = tokens.get(2);
-				d.CFolder(path, name);
+				d.CFolder(path);
 				break;
 			}
 
@@ -73,6 +79,9 @@ public class Main {
 			//case "DisplayDiskStructure":
 			case "d":
 				d.DisplayTreeStructure();
+				System.out.println("----------------------------------------");
+				System.out.println(d.at.toString());
+				System.out.println("----------------------------------------");
 				break;
 
 

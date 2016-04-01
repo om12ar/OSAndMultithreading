@@ -2,18 +2,14 @@ package vfs;
 import java.util.Date;
 public class FolderModel {
 	String name;
-	//String path;
+	String path;
 	Date CreationDate;
 	Date LastModificationDate;
 	
-	public FolderModel(String name, Date creationDate, Date lastModificationDate) {		
-		this.name = name;
-		//this.path = path;
-		CreationDate = creationDate;
-		LastModificationDate = lastModificationDate;
-	}
-	public FolderModel(String name ) {		
+	
+	public FolderModel(String name , String path) {		
 		this.name = name;		
+		this.path = path;
 		Date d = new Date();
 		CreationDate = d;
 		LastModificationDate = d;
@@ -24,12 +20,7 @@ public class FolderModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	/*public String getPath() {
-		return path;
-	}
-	public void setPath(String path) {
-		this.path = path;
-	}*/
+
 	public Date getCreationDate() {
 		return CreationDate;
 	}
