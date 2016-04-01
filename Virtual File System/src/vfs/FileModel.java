@@ -9,13 +9,13 @@ public class FileModel {
 	Date CreationDate ;
 	Date LastModificationDate;
 	
-	public FileModel(String name,String Path , Integer size) {
+	public FileModel(String name,String path , Integer size) {
 		
 		this.name = name;
-		this.path = Path;
+		this.path = path;
 		this.size = size;
 		Date d= new Date();
-		CreationDate =d;
+		CreationDate = d;
 		LastModificationDate = d;
 	}
 	

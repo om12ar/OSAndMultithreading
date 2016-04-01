@@ -1,21 +1,32 @@
 package vfs;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class IndexedAllocation implements AllocationTechnique {
+public class IndexedAllocation extends Disk {
 
-	ArrayList<Pair<String, Integer >> directory ;
+	public IndexedAllocation(int numOfBlocks) throws IOException {
+		super(numOfBlocks);
+		// TODO Auto-generated constructor stub
+	}
+
+	ArrayList<Pair<String, Integer>> directory ;
 	
-	@Override
-	public Boolean Save(String name ,int size) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	public void CFile(String pathString ,int fileSize){
+		
 
-	@Override
-	public Boolean Delete(String path) {
-		// TODO Auto-generated method stub
-		return null;
+
 	}
+	public void DFile(String pathString) {
+		
+
+	}
+	public void DFolder(String pathString) {
+
+		
+	}
+	
+	
 
 }

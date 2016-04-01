@@ -1,39 +1,18 @@
 package vfs;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.FileStore;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
-import java.nio.file.attribute.FileAttributeView;
-import java.nio.file.attribute.FileStoreAttributeView;
-import java.nio.file.attribute.PosixFilePermission;
-import java.nio.file.attribute.PosixFilePermissions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(System.in);
 
-		try {
-			Files.createFile(Paths.get("VFSD.vfs"));
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		// RandomAccessFile drive = new RandomAccessFile("VFSD.vfs", "rw");
-		// drive.setLength(1000000 * 1000);
 
-		Disk d = new Disk(1 , 100);
+
+		Disk d = new ContiguousAllocation(100);
 
 		String cmd = "";
 
@@ -93,7 +72,7 @@ public class Main {
 			case "d":
 				d.DisplayTreeStructure();
 				System.out.println("----------------------------------------");
-				System.out.println(d.at.toString());
+				System.out.println(d.toString());
 				System.out.println("----------------------------------------");
 				break;
 

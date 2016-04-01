@@ -1,25 +1,32 @@
 package vfs;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
-public class Disk {
+public abstract class Disk {
 	Tree tree ;
-	static int diskSize ;
-	AllocationTechnique at ;
-	//ArrayList<FileModel> files;
-//	ArrayList<FolderModel> folders ;
+	int diskSize ;
+	int numOfBlocks;
+	RandomAccessFile drive;
 	
-	public Disk(int x ,int diskSize) {
-		if(x==1){
-			at = new ContiguousAllocation();		
-		}
-		else{
-			at = new IndexedAllocation();
-		}
+	StringBuilder freeSpaceManager;
+	
+	
+	public Disk(int numOfBlocks) throws IOException {
+
 		tree = new Tree();
-		this.diskSize = diskSize;
+		diskSize = numOfBlocks * 1024;
+		
+		drive = new RandomAccessFile("VFSD.vfs", "rw");
+		
+		drive.setLength(diskSize);
+		
+		String temp = String.format("%" + numOfBlocks + "s","").replaceAll(" ", "0");
+		
+		freeSpaceManager = new StringBuilder(temp);
+
 	}
 	public void DisplayStatus(){
 	
@@ -28,6 +35,7 @@ public class Disk {
 	public void DisplayTreeStructure(){
 		tree.printTree(tree.getRootNode(),0);
 	}
+	
 	public void CFolder(String pathString) {
 		
 		ArrayList<String> path = new ArrayList<>();
@@ -40,37 +48,19 @@ public class Disk {
 	}
 	public void CFile(String pathString ,int fileSize){
 		
-		ArrayList<String> path = new ArrayList<>();
-		
-		path.addAll(Arrays.asList(pathString.split("/")));
-		
-		FileModel filemodel = new FileModel(path.get(path.size()-1),pathString , fileSize);
-		
-		//System.err.println("Disk.CFolder()" + path);
-		double numOfBlocks = Math.ceil(fileSize/1000.0) ; 
-		if(at.Save(pathString, (int) numOfBlocks)){
-			tree.createFile(path, filemodel);
-		}
-		else{
-			System.out.println("Creation failed");
-		}
+
 		
 		
 	}
 	public void DFile(String pathString) {
 		
-		ArrayList<String> path = new ArrayList<>();
-		path.addAll(Arrays.asList(pathString.split("/")));
-		if(at.Delete(pathString)){
-			tree.deleteFile(path);
-		}
+
 	}
 	public void DFolder(String pathString) {
-		ArrayList<String> path = new ArrayList<>();
-		path.addAll(Arrays.asList(pathString.split("/")));
-		if(at.Delete(pathString)){
-			tree.deleteFolder(path);
-		}
+
 		
 	}
+	
+	
+	
 }
