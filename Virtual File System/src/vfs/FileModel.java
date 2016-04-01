@@ -1,28 +1,47 @@
 package vfs;
 import java.util.Date;
-public class Folder {
+
+public class FileModel {
+
 	String name;
-	String path;
-	Date CreationDate;
+	String Type;
+//	String Location;
+	Integer size;
+	Date CreationDate ;
 	Date LastModificationDate;
 	
-	public Folder(String name, String path, Date creationDate, Date lastModificationDate) {		
+	public FileModel(String name, String type, String location, Integer size, Date creationDate, Date lastModificationDate) {		
 		this.name = name;
-		this.path = path;
+		Type = type;
+	//	Location = location;
+		this.size = size;
 		CreationDate = creationDate;
 		LastModificationDate = lastModificationDate;
 	}
+	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPath() {
-		return path;
+	public String getType() {
+		return Type;
 	}
-	public void setPath(String path) {
-		this.path = path;
+	public void setType(String type) {
+		Type = type;
+	}
+	/*public String getLocation() {
+		return Location;
+	}
+	public void setLocation(String location) {
+		Location = location;
+	}*/
+	public Integer getSize() {
+		return size;
+	}
+	public void setSize(Integer size) {
+		this.size = size;
 	}
 	public Date getCreationDate() {
 		return CreationDate;

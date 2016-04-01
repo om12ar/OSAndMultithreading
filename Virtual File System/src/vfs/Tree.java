@@ -1,26 +1,83 @@
 package vfs;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
-public class Tree<T> {
-    private Node<T> rootNode;    
-    private List<Node<T>> children;
+public class Tree {
+    private Node<FolderModel> rootNode;
 
-  
-	public Node<T> getRootNode() {
+    public Tree() {
+    	Date d = new Date();
+		System.out.println("Disk.Disk() + " + d.toString());
+		
+    	FolderModel rootFolder = new FolderModel("/" ,d , d);
+		rootNode = new Node<>(rootFolder);
+	}
+	public Node<FolderModel> getRootNode() {
 		return rootNode;
 	}
 
-	public void setRootNode(Node<T> rootNode) {
+	public void setRootNode(Node<FolderModel> rootNode) {
 		this.rootNode = rootNode;
+	}    
+	
+	public Boolean createFolder(ArrayList<String> path, FolderModel newFolder){
+		Node<FolderModel> traverse = new Node<>();
+		traverse= rootNode;
+		
+		//Check if path to folder exists 
+		for(int i= 1 ; i < path.size()  ;i++){
+			boolean found = false;
+			
+			for (int j = 0; j < traverse.getFolders().size(); j++) {
+			
+				if(traverse.getFolders().get(j).getData().getName().equals(path.get(i))){
+					traverse = traverse.getFolders().get(j);
+					found= true;
+					break;
+				}
+			}
+			if(!found){
+				System.out.println("Tree.createFolder() : path not found" );
+				return false;
+			}
+		}
+	
+		
+		// check if this folder already exists in this path	
+		for (int i = 0; i < traverse.getFolders().size(); i++) {
+			if( traverse.getFolders().get(i).getData().getName() == newFolder.getName()){
+				System.out.println("Tree.createFolder() : path Already exists" );
+				return false;
+			}
+		}
+		
+		Node<FolderModel> newFolderNode = new Node<FolderModel>(newFolder);
+		traverse.getFolders().add(newFolderNode);
+		
+		return true;
+		
 	}
-
-	public List<Node<T>> getChildren() {
-		return children;
+	
+	
+	
+	public void printTree(Node<FolderModel> traverse , int d){
+		if(d>0){
+			String indent = String.format(String.format("%%%ds", d), " ").replace(" ","    ");
+			System.out.print(indent);
+		}
+		
+		System.out.println(traverse.getData().getName() +" :");
+		for(int i=0; i < traverse.getFolders().size() ;i++){
+			
+			printTree(traverse.getFolders().get(i) , d+1);
+			//System.out.println(traverse.getData().getName() +" :");
+			for(int j =0 ;j < traverse.getFiles().size() ;j++){
+				System.out.println("\t" + traverse.getFiles().get(j).getData().getName() +" , ");	
+			}
+		}
 	}
-
-	public void setChildren(List<Node<T>> children) {
-		this.children = children;
-	}
-
+	
+	
 }
