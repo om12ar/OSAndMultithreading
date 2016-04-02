@@ -111,7 +111,7 @@ public abstract class Disk {
 	}
 
 	public void SaveDiskToFile() {
-
+		System.out.println("Disk.SaveDiskToFile()");
 		try {
 			FileOutputStream fos = null;
 			ObjectOutputStream oos = null;
