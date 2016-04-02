@@ -32,10 +32,10 @@ public abstract class Disk {
 	
 		System.out.println("Disk Status:");
 		System.out.println("Total Size: " + (numOfBlocks * 1024) +"KBs");
-		System.out.print("Free Space: " + (getFreeBlocks() * 1024) +"KBs");
-		System.out.print("Allocated Space: " + (getAllocatedBlocks() * 1024) +"KBs");
-		System.out.print("No. of Free Blocks: " + getFreeBlocks());
-		System.out.print("No. of Allocated Blocks: " + getAllocatedBlocks());
+		System.out.println("Free Space: " + (getFreeBlocks() * 1024) +"KBs");
+		System.out.println("Allocated Space: " + (getAllocatedBlocks() * 1024) +"KBs");
+		System.out.println("No. of Free Blocks: " + getFreeBlocks());
+		System.out.println("No. of Allocated Blocks: " + getAllocatedBlocks());
 	}
 	
 	public void DisplayTreeStructure(){
@@ -90,7 +90,7 @@ public abstract class Disk {
 		int counter = 0;
 		for(int i = 0; i < freeSpaceManager.length(); i++){
 			
-			if(freeSpaceManager.charAt(i) == 'i'){
+			if(freeSpaceManager.charAt(i) == '1'){
 				counter++;
 			}
 		}

@@ -27,7 +27,7 @@ public class ContiguousAllocation extends Disk {
 
 		double blocksPerFile = Math.ceil(fileSize/1024.0) ; 
 		
-		System.err.println(numOfBlocks +" "+blocksPerFile);
+		
 		if(blocksPerFile > numOfBlocks){
 			
 			System.out.println("Creation failed, No enough space.");
@@ -119,13 +119,16 @@ public class ContiguousAllocation extends Disk {
 	public void DFile(String filePath) {
 		
 		ArrayList<String> path = new ArrayList<>();
+		
+		path.addAll(Arrays.asList(filePath.split("/")));
+		
 		if(tree.deleteFile(path)){
 			
 		
 		for(int i =0 ;i<directory.size();i++ ){
 			//to delete all the children 
 			 if(directory.get(i).first.startsWith(filePath)){
-                 directory.get(i).first = "";
+                // directory.get(i).first = "";
                  
                  int allocationIndex = directory.get(i).second.first;
                  int blocksPerFile = directory.get(i).second.second;
@@ -135,8 +138,8 @@ public class ContiguousAllocation extends Disk {
                 	freeSpaceManager.setCharAt(j, '0');
                  }
                  
-                 //directory.remove(i);
-                 //i--;
+                 directory.remove(i);
+                 i--;
              }
 		}
 		
@@ -152,11 +155,14 @@ public class ContiguousAllocation extends Disk {
 	public void DFolder(String folderPath) {
 		
 		ArrayList<String> path = new ArrayList<>();
+		
+		path.addAll(Arrays.asList(folderPath.split("/")));
+		
 		if(tree.deleteFolder(path)){
 		for(int i =0 ;i<directory.size();i++ ){
 			//to delete all the children 
 			 if(directory.get(i).first.startsWith(folderPath)){
-                 directory.get(i).first = "";
+                // directory.get(i).first = "";
                  
                  int allocationIndex = directory.get(i).second.first;
                  int blocksPerFile = directory.get(i).second.second;
@@ -166,8 +172,8 @@ public class ContiguousAllocation extends Disk {
                 	freeSpaceManager.setCharAt(j, '0');
                  }
                  
-                 //directory.remove(i);
-                 //i--;
+                 directory.remove(i);
+                 i--;
              }
 		}
 		

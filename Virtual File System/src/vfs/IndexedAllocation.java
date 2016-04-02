@@ -74,13 +74,14 @@ public class IndexedAllocation extends Disk {
 	public void DFile(String filePath){
 		
 		ArrayList<String> path = new ArrayList<>();
+		path.addAll(Arrays.asList(filePath.split("/")));
+		
 		if(tree.deleteFile(path)){
 			
 		
 		for(int i =0 ;i<directory.size();i++ ){
 			//to delete all the children 
 			 if(directory.get(i).first.startsWith(filePath)){
-                 directory.get(i).first = "";
                  
                  int indexPointer = directory.get(i).second;
                  int blocksPerFile = indexBlock.get(indexPointer).size();
@@ -93,8 +94,8 @@ public class IndexedAllocation extends Disk {
                 	freeSpaceManager.setCharAt(index, '0');
                  }
                  
-                 //directory.remove(i);
-                 //i--;
+                 directory.remove(i);
+                 i--;
              }
 		}
 		
@@ -105,17 +106,20 @@ public class IndexedAllocation extends Disk {
 		
 
 	}
-	public void DFolder(String filePath){
+	public void DFolder(String folderPath){
 
 		
 		ArrayList<String> path = new ArrayList<>();
+		
+		path.addAll(Arrays.asList(folderPath.split("/")));
+		
 		if(tree.deleteFolder(path)){
 			
 		
 		for(int i =0 ;i<directory.size();i++ ){
 			//to delete all the children 
-			 if(directory.get(i).first.startsWith(filePath)){
-                 directory.get(i).first = "";
+			 if(directory.get(i).first.startsWith(folderPath)){
+                
                  
                  int indexPointer = directory.get(i).second;
                  int blocksPerFile = indexBlock.get(indexPointer).size();
@@ -128,8 +132,8 @@ public class IndexedAllocation extends Disk {
                 	freeSpaceManager.setCharAt(index, '0');
                  }
                  
-                 //directory.remove(i);
-                 //i--;
+                 directory.remove(i);
+                 i--;
              }
 		}
 		
@@ -144,7 +148,15 @@ public class IndexedAllocation extends Disk {
 	
 	@Override
 	public String toString (){
-		return directory.toString();
+		
+		for(int i = 0; i < directory.size(); i++){
+			
+			int index = directory.get(i).second;
+			System.out.print("[(" + directory.get(i).first +", " + index +")] ");
+			System.out.println("[(" + index + ", " + indexBlock.get(index).toString() + ")]");
+		}
+		
+		return "";
 		
 	}
 	

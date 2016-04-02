@@ -45,7 +45,7 @@ public class Tree {
 		
 		// check if this folder already exists in this path	
 		for (int i = 0; i < traverse.getFolders().size(); i++) {
-			System.out.println(traverse.getFolders().get(i).getData().getName()+" != " + newFolder.getName());
+			
 			if( traverse.getFolders().get(i).getData().getName().equals(newFolder.getName())){
 				System.out.println("path Already exists" );
 				return false;
@@ -84,7 +84,7 @@ public class Tree {
 		
 		// check if this folder already exists in this path	
 		for (int i = 0; i < traverse.getFolders().size(); i++) {
-			System.out.println(traverse.getFolders().get(i).getData().getName()+" != " + FileName);
+			
 			if( traverse.getFolders().get(i).getData().getName().equals(FileName)){
 				traverse.getFolders().remove(i);
 				return true;
@@ -159,7 +159,7 @@ public class Tree {
 		}
 		
 		for (int i = 0; i < traverse.getFiles().size(); i++) {
-			System.out.println(traverse.getFiles().get(i).getData().getName()+" != " + fileName);
+			
 			if( traverse.getFiles().get(i).getData().getName().equals(fileName)){
 				traverse.getFiles().remove(i);
 				return true;

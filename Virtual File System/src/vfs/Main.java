@@ -12,18 +12,20 @@ public class Main {
 
 
 
-		Disk d = new ContiguousAllocation(10000000);
+		Disk d = new IndexedAllocation(10000000);
 
 		String cmd = "";
 
 		while (!cmd.equals("0")) {
+			
 			cmd = in.nextLine();
+		
 			ArrayList<String> tokens = new ArrayList<>();
+		
 			tokens.addAll(Arrays.asList(cmd.split("\\s+")));
-			//System.err.println(tokens);
-
+		
 			switch (tokens.get(0)) {
-			case "CFile":{
+			case "CreateFile":{
 				if(tokens.size()!=3){
 					System.out.println("Wrong Command");
 					break;
@@ -34,7 +36,7 @@ public class Main {
 				break;
 			}
 				
-			case "CFolder":{
+			case "CreateFolder":{
 				if(tokens.size()!=2){
 					System.out.println("Wrong Command");
 					break;
@@ -64,20 +66,25 @@ public class Main {
 				d.DFolder(path);
 				break ;
 			}
-			case "DisplayDiskStatus":
+			case "DiskStatus":
+				d.DisplayStatus();
 
 				break;
 
-			//case "DisplayDiskStructure":
-			case "d":
+			case "DiskStructure":
 				d.DisplayTreeStructure();
 				System.out.println("----------------------------------------");
 				System.out.println(d.toString());
 				System.out.println("----------------------------------------");
 				break;
 
-
+			case "FreeSpaceManager":
+			
+				d.printFreeSpaceManager();
+				
+				break;
 			default:
+				System.out.println("Enter a vaild comaand.");
 				break;
 			}
 		}
