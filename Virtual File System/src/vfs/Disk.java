@@ -22,11 +22,7 @@ public abstract class Disk {
 	StringBuilder freeSpaceManager;
 
 	public Disk(int numOfBlocks) throws IOException {
-		File f = new File("DiskStructure.vfs");
-		if(f.exists()) { 
-			ReadDiskFromFile();
-		}
-		else{
+		
 			tree = new Tree();
 			diskSize = numOfBlocks * 1024;
 			this.numOfBlocks = numOfBlocks;
@@ -37,7 +33,7 @@ public abstract class Disk {
 			String temp = String.format("%" + numOfBlocks + "s", "").replaceAll(" ", "0");
 
 			freeSpaceManager = new StringBuilder(temp);
-		}
+		
 		
 	}
 

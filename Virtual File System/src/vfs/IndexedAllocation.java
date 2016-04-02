@@ -1,5 +1,6 @@
 package vfs;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,9 +21,14 @@ public class IndexedAllocation extends Disk {
 	
 	public IndexedAllocation(int numOfBlocks) throws IOException {
 		super(numOfBlocks);
-		
-		directory = new ArrayList<>();
-		indexBlock = new TreeMap<>();
+		File f = new File("DiskStructure.vfs");
+		if(f.exists()) { 
+			ReadDiskFromFile();
+		}
+		else{
+			directory = new ArrayList<>();
+			indexBlock = new TreeMap<>();
+		}
 
 	}
 

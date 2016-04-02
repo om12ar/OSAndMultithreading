@@ -1,5 +1,6 @@
 package vfs;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,7 +21,15 @@ public class ContiguousAllocation extends Disk {
 	
 	public ContiguousAllocation(int numOfBlocks) throws IOException {
 		super(numOfBlocks);
-		directory = new ArrayList<>();
+		
+		File f = new File("DiskStructure.vfs");
+		if(f.exists()) { 
+			ReadDiskFromFile();
+		}
+		else{
+			directory = new ArrayList<>();
+		}
+
 	}
 	
 	
