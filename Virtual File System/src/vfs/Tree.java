@@ -1,8 +1,9 @@
 package vfs;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Tree {
+public class Tree  implements Serializable  {
     private Node<FolderModel> rootNode;
 
     public Tree() {

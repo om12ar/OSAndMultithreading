@@ -1,8 +1,9 @@
 package vfs;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Node<T> {
+public class Node<T extends Serializable>  implements Serializable {
 
 	private T data ;
     private ArrayList<Node<FolderModel>> folders ;

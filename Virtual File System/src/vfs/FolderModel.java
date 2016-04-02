@@ -1,6 +1,7 @@
 package vfs;
+import java.io.Serializable;
 import java.util.Date;
-public class FolderModel {
+public class FolderModel implements Serializable{
 	String name;
 	String path;
 	Date CreationDate;

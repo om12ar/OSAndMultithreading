@@ -1,7 +1,8 @@
 package vfs;
+import java.io.Serializable;
 import java.util.Date;
 
-public class FileModel {
+public class FileModel implements Serializable{
 
 	String name;
 	String path;

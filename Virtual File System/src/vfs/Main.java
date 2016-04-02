@@ -10,10 +10,8 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(System.in);
 
-
-
-		Disk d = new IndexedAllocation(10000000);
-
+		Disk d = new IndexedAllocation(10);
+		//Disk d = new ContiguousAllocation(10);
 		String cmd = "";
 
 		while (!cmd.equals("0")) {
@@ -84,6 +82,7 @@ public class Main {
 				
 				break;
 			default:
+				d.SaveDiskToFile();
 				System.out.println("Enter a vaild comaand.");
 				break;
 			}
