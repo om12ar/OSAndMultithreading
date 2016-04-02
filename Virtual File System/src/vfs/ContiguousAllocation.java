@@ -27,13 +27,13 @@ public class ContiguousAllocation extends Disk {
 
 		double blocksPerFile = Math.ceil(fileSize/1024.0) ; 
 		
-		
+		System.err.println(numOfBlocks +" "+blocksPerFile);
 		if(blocksPerFile > numOfBlocks){
 			
 			System.out.println("Creation failed, No enough space.");
 		}
 		if(tree.createFile(path, filemodel)){
-			
+		//	System.err.println("Created");
 			int lastAllocatedBlock = freeSpaceManager.lastIndexOf("1");
 			int allocationIndex = -1;
 			

@@ -12,7 +12,7 @@ public class Main {
 
 
 
-		Disk d = new ContiguousAllocation(100);
+		Disk d = new ContiguousAllocation(10000000);
 
 		String cmd = "";
 

@@ -18,7 +18,7 @@ public abstract class Disk {
 
 		tree = new Tree();
 		diskSize = numOfBlocks * 1024;
-		
+		this.numOfBlocks = numOfBlocks;
 		drive = new RandomAccessFile("VFSD.vfs", "rw");
 		
 		drive.setLength(diskSize);
