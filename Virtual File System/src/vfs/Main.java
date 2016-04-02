@@ -88,37 +88,7 @@ public class Main {
 				break;
 			}
 		}
-/*
-		d.CFolder("/", "om12ar");
-		d.DisplayTreeStructure();
-		d.CFolder("/", "another");
-		d.DisplayTreeStructure();
-		d.CFolder("/om12ar", "test");
-		d.DisplayTreeStructure();
-		d.CFolder("/om12ar/test", "hi");
-		d.DisplayTreeStructure();
 
-		d.CFile("/", "file", 100);
-		d.CFile("/", "file2", 100);
-		d.CFile("/om12ar", "mine", 100);
-		d.DisplayTreeStructure();*/
-
-		// Path path = Paths.get(drive.getAbsolutePath() , "dir1");
-
-		// Files.createDirectories(path);
-
-		/*
-		 * Path path1 = Paths.get("/", "Parent","Child1");
-		 * 
-		 * //creates Directory as Directory Child1 under as D:\Parent
-		 * Files.createDirectory(path1);
-		 * 
-		 * //creates temp directory in file system temp directory
-		 * Files.createTempDirectory("Concretepage");
-		 * 
-		 * //creates temp directory in the specified path
-		 * Files.createTempDirectory(path,"Concretepage");
-		 */
 	}
 
 }

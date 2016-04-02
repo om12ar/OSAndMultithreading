@@ -94,6 +94,7 @@ public class IndexedAllocation extends Disk {
                 	freeSpaceManager.setCharAt(index, '0');
                  }
                  
+                 indexBlock.remove(indexPointer);
                  directory.remove(i);
                  i--;
              }
@@ -132,6 +133,7 @@ public class IndexedAllocation extends Disk {
                 	freeSpaceManager.setCharAt(index, '0');
                  }
                  
+                 indexBlock.remove(indexPointer);
                  directory.remove(i);
                  i--;
              }
