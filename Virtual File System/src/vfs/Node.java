@@ -7,7 +7,7 @@ public class Node<T> {
 	private T data ;
     private ArrayList<Node<FolderModel>> folders ;
     private ArrayList<Node<FileModel>> files ;
-    private Node<FileModel> parent;
+
     
     
    public Node(T otherData) {
@@ -38,12 +38,7 @@ public class Node<T> {
 	public void setFiles(ArrayList<Node<FileModel>> files) {
 		this.files = files;
 	}
-	public Node<FileModel> getParent() {
-		return parent;
-	}
-	public void setParent(Node<FileModel> parent) {
-		this.parent = parent;
-	}
+
 
     
 

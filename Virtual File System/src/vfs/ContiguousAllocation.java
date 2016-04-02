@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class ContiguousAllocation extends Disk {
 	
-	//  file 	start 	#ofblocks
+	//  file 	start 	# of blocks
 	ArrayList<Pair<String, Pair <Integer ,Integer>>> directory ;
 	
 	public ContiguousAllocation(int numOfBlocks) throws IOException {
@@ -75,8 +75,16 @@ public class ContiguousAllocation extends Disk {
 				
 				if (blocksPerFile > maxCounter){
 					
-					System.out.println("Creation failed, No enough space.");
-					tree.deleteFile(path);
+					if(blocksPerFile < diskSize - lastAllocatedBlock){
+						
+						allocationIndex = lastAllocatedBlock + 1;
+						
+					}
+					else
+					{
+						System.out.println("Creation failed, No enough space.");
+						tree.deleteFile(path);
+					}
 				}
 				else{
 					

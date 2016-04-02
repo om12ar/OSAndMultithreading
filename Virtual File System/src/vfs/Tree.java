@@ -135,7 +135,7 @@ public class Tree {
 	}
 	
 	
-	public Boolean  deleteFile(ArrayList<String> path) {
+	public Boolean deleteFile(ArrayList<String> path) {
 		
 		Node<FolderModel> traverse = new Node<>();
 		traverse= rootNode;
