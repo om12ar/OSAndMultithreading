@@ -81,8 +81,13 @@ public class Main {
 				d.printFreeSpaceManager();
 				
 				break;
-			default:
+			case "SaveDisk":
+				
 				d.SaveDiskToFile();
+				
+				break;
+			default:
+				
 				System.out.println("Enter a vaild comaand.");
 				break;
 			}
