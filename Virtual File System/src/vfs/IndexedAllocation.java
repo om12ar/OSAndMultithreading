@@ -1,9 +1,17 @@
 package vfs;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class IndexedAllocation extends Disk {
 
@@ -162,6 +170,64 @@ public class IndexedAllocation extends Disk {
 		
 	}
 	
+	@Override
+	public void SaveDiskToFile() {
+		System.out.println("Disk.SaveDiskToFile()");
+		try {
+			FileOutputStream fos = null;
+			ObjectOutputStream oos = null;
+
+			fos = new FileOutputStream("DiskStructure.vfs");
+
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(tree);
+			oos.writeInt(diskSize);
+			oos.writeInt( numOfBlocks);
+			oos.writeUTF(freeSpaceManager.toString());
+			oos.writeObject(directory);
+			oos.writeObject(indexBlock);
+			oos.close();
+			fos.close();
+
+		} catch (FileNotFoundException ex) {
+			Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (IOException ex) {
+			Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
 	
+	public void ReadDiskFromFile() {
+		try {
+			FileInputStream fis = null;
+			ObjectInputStream ois = null;
+
+			fis = new FileInputStream("DiskStructure.vfs");
+			ois = new ObjectInputStream(fis);
+			tree = (Tree) ois.readObject();
+			diskSize = ois.readInt();
+			numOfBlocks = ois.readInt();
+			drive = new RandomAccessFile("VFSD.vfs", "rw");
+			drive.setLength(diskSize);
+			String temp = ois.readUTF();
+			freeSpaceManager = new StringBuilder(temp);
+			
+			directory = (ArrayList<Pair<String, Integer>>) ois.readObject();
+			indexBlock = (TreeMap<Integer, ArrayList<Integer>>) ois.readObject();
+			
+			System.out.println("IndexedAllocation.ReadDiskFromFile()" + directory);
+			System.out.println("IndexedAllocation.ReadDiskFromFile()" + indexBlock);
+			ois.close();
+			fis.close();
+
+		} catch (FileNotFoundException ex) {
+			Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (IOException ex) {
+			Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
 
 }

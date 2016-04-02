@@ -111,55 +111,11 @@ public abstract class Disk {
 	}
 
 	public void SaveDiskToFile() {
-		System.out.println("Disk.SaveDiskToFile()");
-		try {
-			FileOutputStream fos = null;
-			ObjectOutputStream oos = null;
-
-			fos = new FileOutputStream("DiskStructure.vfs");
-
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(tree);
-			oos.writeInt(diskSize);
-			oos.writeInt( numOfBlocks);
-			oos.writeUTF(freeSpaceManager.toString());
-
-			oos.close();
-			fos.close();
-
-		} catch (FileNotFoundException ex) {
-			Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (IOException ex) {
-			Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
-		}
 
 	}
 
 	public void ReadDiskFromFile() {
-		try {
-			FileInputStream fis = null;
-			ObjectInputStream ois = null;
-
-			fis = new FileInputStream("DiskStructure.vfs");
-			ois = new ObjectInputStream(fis);
-			tree = (Tree) ois.readObject();
-			diskSize = ois.readInt();
-			numOfBlocks = ois.readInt();
-			drive = new RandomAccessFile("VFSD.vfs", "rw");
-			drive.setLength(diskSize);
-			String temp = ois.readUTF();
-			freeSpaceManager = new StringBuilder(temp);
-			ois.close();
-			fis.close();
-
-		} catch (FileNotFoundException ex) {
-			Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (IOException ex) {
-			Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
-		}
-
+		
 	}
 
 }
