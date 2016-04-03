@@ -1,5 +1,6 @@
 package vfs;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,9 +10,12 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(System.in);
+		Disk d = null ;
 
-		Disk d = new IndexedAllocation(10);
-		//Disk d = new ContiguousAllocation(10);
+		d = new ContiguousAllocation(1000000);
+		
+		//d = new IndexedAllocation(1000000);
+						
 		String cmd = "";
 
 		while (!cmd.equals("0")) {

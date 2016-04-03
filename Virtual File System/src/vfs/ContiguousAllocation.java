@@ -223,7 +223,8 @@ public class ContiguousAllocation extends Disk {
 			oos.writeObject(tree);
 			oos.writeInt(diskSize);
 			oos.writeInt( numOfBlocks);
-			oos.writeUTF(freeSpaceManager.toString());
+			String s = new String(freeSpaceManager.toString());
+			oos.writeObject(s);
 			
 			oos.writeObject(directory);
 			
@@ -251,7 +252,7 @@ public class ContiguousAllocation extends Disk {
 			numOfBlocks = ois.readInt();
 			drive = new RandomAccessFile("VFSD.vfs", "rw");
 			drive.setLength(diskSize);
-			String temp = ois.readUTF();
+			String temp = (String) ois.readObject();
 			freeSpaceManager = new StringBuilder(temp);
 			
 			directory = (ArrayList<Pair<String, Pair<Integer, Integer>>>) ois.readObject();
