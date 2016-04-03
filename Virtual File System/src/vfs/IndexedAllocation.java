@@ -189,7 +189,8 @@ public class IndexedAllocation extends Disk {
 			oos.writeObject(tree);
 			oos.writeInt(diskSize);
 			oos.writeInt( numOfBlocks);
-			oos.writeUTF(freeSpaceManager.toString());
+			String temp = new String(freeSpaceManager.toString());
+			oos.writeObject(temp);
 			oos.writeObject(directory);
 			oos.writeObject(indexBlock);
 			oos.close();
@@ -215,7 +216,7 @@ public class IndexedAllocation extends Disk {
 			numOfBlocks = ois.readInt();
 			drive = new RandomAccessFile("VFSD.vfs", "rw");
 			drive.setLength(diskSize);
-			String temp = ois.readUTF();
+			String temp = (String) ois.readObject();
 			freeSpaceManager = new StringBuilder(temp);
 			
 			directory = (ArrayList<Pair<String, Integer>>) ois.readObject();

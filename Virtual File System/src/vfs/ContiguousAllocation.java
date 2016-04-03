@@ -223,8 +223,8 @@ public class ContiguousAllocation extends Disk {
 			oos.writeObject(tree);
 			oos.writeInt(diskSize);
 			oos.writeInt( numOfBlocks);
-			String s = new String(freeSpaceManager.toString());
-			oos.writeObject(s);
+			String temp = new String(freeSpaceManager.toString());
+			oos.writeObject(temp);
 			
 			oos.writeObject(directory);
 			
