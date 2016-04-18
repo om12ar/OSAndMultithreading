@@ -14,7 +14,7 @@ public class Main {
 		System.out.println("Initial head start cylinder:");
 		int startingPosition = in.nextInt();
 		System.out.println("Disc size -for SCAN and CSCAN- :");
-		int discSize = in.nextInt();
+		int discSize = in.nextInt();		
 		String[] tempStrings = SRequests.split("\\s*,\\s*");
 		
 		ArrayList<Integer> requests = new ArrayList<>();
@@ -42,6 +42,10 @@ public class Main {
 		CSCAN cscan = new CSCAN(discSize);
 		cscan.serve(startingPosition, new ArrayList<>(requests));
 		cscan.print();
+		System.out.println("-----------------SCAN--------------------");
+		SCAN scan = new SCAN(discSize);
+		scan.serve(startingPosition, new ArrayList<>(requests));
+		scan.print();
 		
 		
 		
