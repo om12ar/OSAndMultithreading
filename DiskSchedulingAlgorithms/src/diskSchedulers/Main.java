@@ -9,7 +9,10 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		String SRequests = in.nextLine();
+		System.out.println("Initial head start cylinder:");
 		int startingPosition = in.nextInt();
+		System.out.println("Disc size -for CSCAN and CLOOK:");
+		int discSize = in.nextInt();
 		String[] tempStrings = SRequests.split("\\s*,\\s*");
 		
 		ArrayList<Integer> requests = new ArrayList<>();
@@ -18,13 +21,16 @@ public class Main {
 		}
 		
 		FCFS fcfs = new FCFS();
-		fcfs.serve(startingPosition, requests);
+		fcfs.serve(startingPosition, new ArrayList<>(requests));
 		fcfs.print();
 		System.out.println("-----------------------------------------");
 		SSTF sstf = new SSTF();
-		sstf.serve(startingPosition, requests);
+		sstf.serve(startingPosition, new ArrayList<>(requests));
 		sstf.print();
-		
+		System.out.println("-----------------------------------------");
+		CLOOK clook = new CLOOK();
+		clook.serve(startingPosition, new ArrayList<>(requests));
+		clook.print();
 	}
 
 	
