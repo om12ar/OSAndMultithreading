@@ -38,6 +38,10 @@ public class Main {
 		LOOK look = new LOOK();
 		look.serve(startingPosition, new ArrayList<>(requests));
 		look.print();
+		System.out.println("-----------------CSCAN-------------------");
+		CSCAN cscan = new CSCAN(discSize);
+		cscan.serve(startingPosition, new ArrayList<>(requests));
+		cscan.print();
 		
 		
 		
