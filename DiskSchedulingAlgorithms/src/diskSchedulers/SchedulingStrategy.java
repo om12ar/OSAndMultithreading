@@ -14,6 +14,8 @@ public abstract class SchedulingStrategy {
 	}
 	
 	public abstract void serve(int startingPosition ,  ArrayList<Integer> requests ) ;
+	public abstract int getNext(int currentPosition ,  ArrayList<Integer> requests ) ;
+	
 	public void print() {
 		
 		System.out.println("sequence : "+sequence);

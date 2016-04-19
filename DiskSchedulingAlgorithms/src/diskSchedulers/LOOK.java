@@ -13,7 +13,6 @@ public class LOOK extends SchedulingStrategy {
 	public void serve(int startingPosition, ArrayList<Integer> requests) {
 		int currentHeadPosition = startingPosition;
 		 Collections.sort(requests);
-		
 		while(requests.size()>0){
 			int nextRequest = getNext(currentHeadPosition , requests );
 			totalHeadMovement+=Math.abs(currentHeadPosition- requests.get(nextRequest));
@@ -24,6 +23,7 @@ public class LOOK extends SchedulingStrategy {
 		}
 
 	}
+	@Override
 	public int getNext(int currentPosition , ArrayList<Integer> requests) {
 		
 		int index = -1;

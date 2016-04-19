@@ -18,5 +18,9 @@ public class FCFS extends SchedulingStrategy {
 			currentHeadPosition = requests.get(i) ;
 		}
 	}
+	@Override
+	public int getNext(int currentPosition , ArrayList<Integer> requests) {
+		return -1;
+	}
 
 }
