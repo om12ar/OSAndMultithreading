@@ -11,7 +11,7 @@ public class SCAN extends SchedulingStrategy {
 	public SCAN(int ds) {
 		super();
 		diskSize =ds;
-		direction=1;
+		direction=-1;
 		seekToEdge = false;
 	}
 
