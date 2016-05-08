@@ -1,10 +1,17 @@
 package vfs;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.TreeMap;
+import java.util.Map.Entry;
 
 public class Tree  implements Serializable  {
-    private Node<FolderModel> rootNode;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6739814538968420946L;
+	private Node<FolderModel> rootNode;
 
     public Tree() {
     	Date d = new Date();
@@ -136,11 +143,6 @@ public class Tree  implements Serializable  {
 			
 			if( traverse.getFolders().get(i).getData().getName().equals(FileName)){
 				//System.out.println("in main del " + traverse.getFolders().get(i).getData().getName());
-				if(traverse.getFolders().get(i).getData().getPermissions().get(ProtectionLayer.currentUser) == null ||
-						traverse.getFolders().get(i).getData().getPermissions().get(ProtectionLayer.currentUser).charAt(1) == '0'){
-					System.out.println("Permission denied.");
-					return false;
-				}
 				boolean couldDelete = 	couldDelete(traverse.getFolders().get(i));
 				
 				//System.out.println("CouldDelete: " + couldDelete);
@@ -299,7 +301,63 @@ public class Tree  implements Serializable  {
 			}
 		}
 	}
-	
-	
+	ArrayList<TreeMap<String, String>> usersPermissions = new ArrayList<>();
+
+	public TreeMap<String, TreeMap<String, String> >  getAllPermissions (Node<FolderModel> traverse) {
+		
+		TreeMap<String, TreeMap<String, String> > temp=  new TreeMap<>();
+		temp.put(traverse.getData().getName(), traverse.getData().getPermissions());
+		for(int i=0; i < traverse.getFolders().size() ;i++){
+			
+			temp.putAll(getAllPermissions(traverse.getFolders().get(i)));
+
+		}
+		
+		return temp;
+	}
+	public void setAllPermissions (TreeMap<String, TreeMap<String, String>> permissions) {
+		
+		for (Entry<String,  TreeMap<String, String>> entry : permissions.entrySet()) {
+			String key = entry.getKey();
+			TreeMap<String, String> value = entry.getValue();
+			
+			ArrayList<String> path = new ArrayList<>();
+			path.addAll(Arrays.asList(key.split("/")));
+			setSinglePermission(path , value);
+			
+			System.out.println("setAllPermissions "+ key + " => " + value);
+		}
+		
+	}
+	Node<FolderModel> setSinglePermission(ArrayList<String> path , TreeMap<String, String> permissions){
+		
+		Node<FolderModel> traverse = new Node<>();
+		traverse= rootNode;
+		
+		//Check if path to folder exists 
+		for(int i= 1 ; i < path.size()-1  ;i++){
+			boolean found = false;
+			
+			for (int j = 0; j < traverse.getFolders().size(); j++) {
+			
+				if(traverse.getFolders().get(j).getData().getName().equals(path.get(i))){
+					
+					traverse = traverse.getFolders().get(j);
+					traverse.getData().setAllUsersPermissions(permissions);
+					break;
+					
+				}
+			}
+			if(!found){
+				System.out.println("This path is not found" );
+				return null;
+			}
+			
+			
+		}
+		
+		return null;
+	}
+
 	
 }

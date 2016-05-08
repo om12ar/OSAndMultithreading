@@ -130,8 +130,6 @@ public class ContiguousAllocation extends Disk {
 		
 	}
 	
-	
-	
 
 	@Override
 	public void DFile(String filePath) {
@@ -230,7 +228,7 @@ public class ContiguousAllocation extends Disk {
 			
 			oos.close();
 			fos.close();
-
+			writePermissionToFIle();
 		} catch (FileNotFoundException ex) {
 			Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (IOException ex) {

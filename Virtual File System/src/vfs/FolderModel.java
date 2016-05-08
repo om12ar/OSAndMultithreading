@@ -63,4 +63,7 @@ public class FolderModel implements Serializable{
 		
 		return usersPermissions;
 	}
+	public void setAllUsersPermissions(TreeMap<String, String> permissions){
+		this.usersPermissions = 	permissions ;
+	}
 }

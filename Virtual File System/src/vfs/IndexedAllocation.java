@@ -178,6 +178,7 @@ public class IndexedAllocation extends Disk {
 	
 	@Override
 	public void SaveDiskToFile() {
+		
 		System.out.println("Disk.SaveDiskToFile()");
 		try {
 			FileOutputStream fos = null;
@@ -195,7 +196,8 @@ public class IndexedAllocation extends Disk {
 			oos.writeObject(indexBlock);
 			oos.close();
 			fos.close();
-
+			
+			writePermissionToFIle();
 		} catch (FileNotFoundException ex) {
 			Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (IOException ex) {
