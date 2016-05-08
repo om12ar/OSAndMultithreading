@@ -21,6 +21,46 @@ public class Tree  implements Serializable  {
 		this.rootNode = rootNode;
 	}    
 	
+	
+	Node<FolderModel> findFolder(ArrayList<String> path){
+		
+		Node<FolderModel> traverse = new Node<>();
+		traverse= rootNode;
+		
+		//Check if path to folder exists 
+		for(int i= 1 ; i < path.size()-1  ;i++){
+			boolean found = false;
+			
+			for (int j = 0; j < traverse.getFolders().size(); j++) {
+			
+				if(traverse.getFolders().get(j).getData().getName().equals(path.get(i))){
+					
+					traverse = traverse.getFolders().get(j);
+					found = true;
+					break;
+					
+				}
+			}
+			if(!found){
+				System.out.println("This path is not found" );
+				return null;
+			}
+			
+			
+		}
+		System.out.println(path.toString());
+		System.out.println(path.get(path.size() - 1));
+		System.out.println(traverse.getData().getName());
+		for (int i = 0; i < traverse.getFolders().size(); i++) {
+			
+			if( traverse.getFolders().get(i).getData().getName().equals(path.get(path.size() - 1))){
+				System.out.println(traverse.getData().getName());
+				return traverse.getFolders().get(i);
+			}
+		}
+		
+		return null;
+	}
 	public Boolean createFolder(ArrayList<String> path, FolderModel newFolder){
 		Node<FolderModel> traverse = new Node<>();
 		traverse= rootNode;
@@ -53,9 +93,17 @@ public class Tree  implements Serializable  {
 			}
 		}
 		
-		Node<FolderModel> newFolderNode = new Node<FolderModel>(newFolder);
-		traverse.getFolders().add(newFolderNode);
 		
+		if(traverse.getData().getPermissions().get(ProtectionLayer.currentUser) == null ||
+				traverse.getData().getPermissions().get(ProtectionLayer.currentUser).charAt(0) == '0'){
+			System.out.println("Permission denied");
+		}
+		else{
+			Node<FolderModel> newFolderNode = new Node<FolderModel>(newFolder);
+			newFolderNode.getData().setPermissions("admin", "11");
+			newFolderNode.getData().setPermissions(ProtectionLayer.currentUser, "11");
+			traverse.getFolders().add(newFolderNode);
+		}
 		return true;
 		
 	}
@@ -87,8 +135,19 @@ public class Tree  implements Serializable  {
 		for (int i = 0; i < traverse.getFolders().size(); i++) {
 			
 			if( traverse.getFolders().get(i).getData().getName().equals(FileName)){
-				traverse.getFolders().remove(i);
-				return true;
+				//System.out.println("in main del " + traverse.getFolders().get(i).getData().getName());
+				boolean couldDelete = 	couldDelete(traverse.getFolders().get(i));
+				
+				//System.out.println("CouldDelete: " + couldDelete);
+				if(couldDelete){
+					traverse.getFolders().remove(i);
+					return true;
+				}
+				else{
+					System.out.println("Permission denied.");
+					return false;
+				}
+				
 			}
 		}
 		
@@ -120,7 +179,7 @@ public class Tree  implements Serializable  {
 		}
 	
 		
-		// check if this folder already exists in this path	
+		// check if this file already exists in this path	
 		for (int i = 0; i < traverse.getFiles().size(); i++) {
 			if( traverse.getFiles().get(i).getData().getName().equals(newFile.getName())){
 				System.out.println("this File Already exists !" );
@@ -128,14 +187,47 @@ public class Tree  implements Serializable  {
 			}
 		}
 		
-		Node<FileModel> newFileNode = new Node<FileModel>(newFile);
-		traverse.getFiles().add(newFileNode);
-		
+		if(traverse.getData().getPermissions().get(ProtectionLayer.currentUser) == null ||
+				traverse.getData().getPermissions().get(ProtectionLayer.currentUser).charAt(0) == '0'){
+			System.out.println("Permission denied");
+		}
+		else{
+				Node<FileModel> newFileNode = new Node<FileModel>(newFile);
+				traverse.getFiles().add(newFileNode);
+			}
 		return true;
 		
 	}
 	
-	
+	public boolean couldDelete(Node<FolderModel> node){
+		
+	//	System.out.println("node: " + node.getData().getName());
+	//	System.out.println("size:" + node.getFolders().size());
+		
+		if (node.getFolders().size() == 0){
+		//	System.out.println("Deepest " + node.getData().getName());
+			if(node.getData().getPermissions().get(ProtectionLayer.currentUser) == null || node.getData().getPermissions().get(ProtectionLayer.currentUser).charAt(1) == '0'){
+			//	System.out.println(" false ");
+				return false;
+			}
+			
+			else{
+			//	System.out.println(" true ");
+				return true;
+			}
+		}
+		
+		boolean couldDel = true;
+		for(int i =0; i < node.getFolders().size(); i++){
+			
+			System.out.println("curr folder " + node.getFolders().get(i).getData().getName());
+			if (couldDelete(node.getFolders().get(i)) == false) 
+				couldDel = false;
+				break;
+		}
+		
+		return couldDel;
+	}
 	public Boolean deleteFile(ArrayList<String> path) {
 		
 		Node<FolderModel> traverse = new Node<>();
@@ -157,6 +249,12 @@ public class Tree  implements Serializable  {
 				System.out.println("This path is not found" );
 				return false;
 			}
+		}
+		
+		if(traverse.getData().getPermissions().get(ProtectionLayer.currentUser) == null ||
+				traverse.getData().getPermissions().get(ProtectionLayer.currentUser).charAt(0) == '1'){
+				System.out.println("Permission denied");
+				return false;
 		}
 		
 		for (int i = 0; i < traverse.getFiles().size(); i++) {

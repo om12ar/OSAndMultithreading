@@ -10,6 +10,16 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(System.in);
+		
+		ProtectionLayer system = new ProtectionLayer();
+		boolean loggedIn;
+		
+		do{
+			System.out.println("Login: ");
+			loggedIn = system.login(in.next(), in.next());
+			
+		}while(!loggedIn);
+		
 		Disk d = null ;
 
 		d = new ContiguousAllocation(1000000);
@@ -27,6 +37,40 @@ public class Main {
 			tokens.addAll(Arrays.asList(cmd.split("\\s+")));
 		
 			switch (tokens.get(0)) {
+			
+			case "Login":{
+				if(tokens.size()!=3){
+					System.out.println("Wrong Command");
+					break;
+				}
+				system.login(tokens.get(1), tokens.get(2));
+				break;
+			}
+			case "TellUser":{
+				if(tokens.size()!=1){
+					System.out.println("Wrong Command");
+					break;
+				}
+				system.tellUser();
+				break;
+			}
+			case "CreateUser":{
+				if(tokens.size()!=3){
+					System.out.println("Wrong Command");
+					break;
+				}
+				system.createUser(tokens.get(1), tokens.get(2));
+				break;
+			}
+			case "Grant":{
+				if(tokens.size()!=4){
+					System.out.println("Wrong Command");
+					break;
+				}
+				d.chmod(tokens.get(2), tokens.get(1), tokens.get(3));
+				System.out.println("done");
+				break;
+			}
 			case "CreateFile":{
 				if(tokens.size()!=3){
 					System.out.println("Wrong Command");

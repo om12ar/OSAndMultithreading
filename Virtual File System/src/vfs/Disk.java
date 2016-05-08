@@ -113,6 +113,31 @@ public abstract class Disk {
 	public void ReadDiskFromFile() {
 		
 	}
-
+	
+	public void chmod(String folderPath, String user, String permissions){
+		
+		if (!ProtectionLayer.currentUser.equals("admin")){
+			System.out.println("Permission denied.");
+		}
+		else if(ProtectionLayer.users.get(user) == null){
+			System.out.println("User doesn't exist.");
+		}
+		else{
+			
+			ArrayList<String> path = new ArrayList<>();
+			path.addAll(Arrays.asList(folderPath.split("/")));
+			Node<FolderModel> node = new Node<>();
+			
+			node = tree.findFolder(path);
+			
+			if(node != null){
+				
+				node.getData().setPermissions(user, permissions);
+				
+				System.out.println(node.getData().getName() + node.getData().usersPermissions.toString());
+			}
+			
+		}
+	}
 }
 
