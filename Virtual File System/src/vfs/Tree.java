@@ -257,7 +257,7 @@ public class Tree  implements Serializable  {
 		}
 		
 		if(traverse.getData().getPermissions().get(ProtectionLayer.currentUser) == null ||
-				traverse.getData().getPermissions().get(ProtectionLayer.currentUser).charAt(0) == '1'){
+				traverse.getData().getPermissions().get(ProtectionLayer.currentUser).charAt(1) == '0'){
 				System.out.println("Permission denied");
 				return false;
 		}
