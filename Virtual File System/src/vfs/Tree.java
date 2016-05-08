@@ -136,6 +136,11 @@ public class Tree  implements Serializable  {
 			
 			if( traverse.getFolders().get(i).getData().getName().equals(FileName)){
 				//System.out.println("in main del " + traverse.getFolders().get(i).getData().getName());
+				if(traverse.getFolders().get(i).getData().getPermissions().get(ProtectionLayer.currentUser) == null ||
+						traverse.getFolders().get(i).getData().getPermissions().get(ProtectionLayer.currentUser).charAt(1) == '0'){
+					System.out.println("Permission denied.");
+					return false;
+				}
 				boolean couldDelete = 	couldDelete(traverse.getFolders().get(i));
 				
 				//System.out.println("CouldDelete: " + couldDelete);
